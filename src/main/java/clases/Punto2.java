@@ -26,9 +26,27 @@ public class Punto2 {
 
     public static List<Integer> encontrarPrimos(int N) {
         return IntStream.iterate(2, i -> i + 1)
-                .filter(Punto3::esPrimo)
+                .filter(Punto2::esPrimo)
                 .limit(N)
                 .boxed()
                 .collect(Collectors.toList());
+    }
+
+    public static boolean esPrimo(long n) {
+        if (n <= 1) {
+            return false;
+        }
+        if (n <= 3) {
+            return true;
+        }
+        if (n % 2 == 0 || n % 3 == 0) {
+            return false;
+        }
+        for (long i = 5; i * i <= n; i += 6) {
+            if (n % i == 0 || n % (i + 2) == 0) {
+                return false;
+            }
+        }
+        return true;
     }
 }
